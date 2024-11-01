@@ -2,3 +2,8 @@ pandas
 numpy
 matplotlib
 seaborn
+watermark
+plotly
+dash
+xgboost
+scikit-learn
