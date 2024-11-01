@@ -2,3 +2,6 @@ pandas
 numpy
 matplotlib
 seaborn
+Flask
+Flask-CORS
+statsmodels
