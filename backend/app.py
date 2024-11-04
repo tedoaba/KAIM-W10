@@ -9,7 +9,7 @@ CORS(app)
 
 # Load data
 data = pd.read_csv('../data/Brent_Oil_Prices.csv')
-data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
+data['Date'] = pd.to_datetime(data['Date'], dayfirst=True, errors='coerce') 
 data.set_index('Date', inplace=True)
 
 # Routes
