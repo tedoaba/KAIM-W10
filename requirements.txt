@@ -5,3 +5,4 @@ seaborn
 Flask
 Flask-CORS
 statsmodels
+catboost
