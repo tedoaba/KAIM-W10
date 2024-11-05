@@ -9,12 +9,11 @@ sys.path.append(os.path.abspath('../src'))
 
 from data_loader import load_data, load_datasets, rename_columns
 from analysis import calculate_moving_averages, merge_datasets
-from visualization import plot_price_trend, plot_moving_averages, plot_prices, plot_with_annotation, plot_residuals, plot_forecast, plot_actual_vs_predicted
-
+from visualization import plot_price_trend, plot_moving_averages, plot_prices, plot_with_annotation, plot_residuals, plot_forecast, plot_actual_vs_predicted, plot_brent_prices_with_events_from_json
 from feature_engineering import add_time_features, split_data, generate_future_dates, create_future_features, forecast_future
 from model_training import initialize_xgboost, train_model, evaluate_model, display_metrics
 
-def main(oil_path, gas_path):
+def main(oil_path, gas_path, event_path):
 
     data = load_data(oil_path)
 
@@ -66,9 +65,15 @@ def main(oil_path, gas_path):
     # Plot Actual vs Predicted
     plot_actual_vs_predicted(y_test, y_pred)
 
+    # Call the function with the path to the JSON file
+    data = pd.read_csv(oil_path)
+    plot_brent_prices_with_events_from_json(data,event_path)
+
+
 
 
 if __name__ == "__main__":
     oil_path = '../data/Brent_Oil_Prices.csv'
     gas_path = '../data/natural_gas_daily.csv'
-    main(oil_path, gas_path)
+    event_path =  '../data/events.json'
+    main(oil_path, gas_path, event_path)

@@ -3,6 +3,7 @@ import seaborn as sns
 import matplotlib.patches as patches
 import matplotlib.dates as mdates
 import pandas as pd
+import json
 
 sns.set(style="whitegrid")
 
@@ -172,4 +173,64 @@ def plot_actual_vs_predicted(y_test, y_pred):
     plt.ylabel('Predicted Values')
     plt.grid(True)
     plt.savefig('../figures/xgb_actual_vs_predicted.png', format='png', dpi=300)
+    plt.show()
+
+
+def plot_brent_prices_with_events_from_json(df, json_file):
+    # Convert 'date' column to datetime if not already
+    df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+
+    # Load events from JSON file
+    with open(json_file, 'r') as f:
+        events = json.load(f)
+
+    # Define a color palette for the events
+    colors = plt.cm.tab20.colors  # Use a colormap with enough colors
+    event_colors = {event: colors[i % len(colors)] for i, event in enumerate(events.values())}
+
+    # Create subplots for each 5-year interval
+    start_date = df['Date'].min()
+    end_date = df['Date'].max()
+    num_years = (end_date - start_date).days // 365
+    num_plots = num_years // 5 + (num_years % 5 > 0)
+
+    fig, axes = plt.subplots(num_plots, 1, figsize=(18, 6 * num_plots), sharex=True)
+
+    # Plotting each subplot
+    for i in range(num_plots):
+        ax = axes[i]
+        interval_start = start_date + pd.DateOffset(years=i * 5)
+        interval_end = start_date + pd.DateOffset(years=(i + 1) * 5)
+
+        # Filter data for the current interval
+        interval_data = df[(df['Date'] >= interval_start) & (df['Date'] < interval_end)]
+
+        # Plot the price data
+        ax.plot(interval_data['Date'], interval_data['Price'], label="Brent Oil Price", color="blue")
+
+        # Annotating events with colored dots
+        for date, event in events.items():
+            event_date = pd.to_datetime(date)
+            if interval_start <= event_date < interval_end:
+                # Check if there is a price value for the event date
+                event_price = interval_data[interval_data['Date'] == event_date]['Price']
+                if not event_price.empty:
+                    ax.plot(event_date, event_price.values[0], 
+                            'o', color=event_colors[event], markersize=12, 
+                            label=event, markeredgewidth=2.5, markeredgecolor='black')
+
+        # Labels and grid for each subplot
+        ax.set_ylabel('Price (USD)')
+        ax.set_title(f'Brent Oil Price from {interval_start.year} to {interval_end.year}')
+        ax.grid(True)
+        ax.legend(loc='upper left', fontsize=8, title="Events")
+
+    # Set x-axis format and labels for the last subplot
+    axes[-1].set_xlabel('Date')
+    axes[-1].xaxis.set_major_locator(mdates.YearLocator(1))  # Set major ticks every year
+    axes[-1].xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+
+    # Show plot
+    plt.tight_layout()
+    plt.savefig('../figures/brent_prices_with_events.png', format='png', dpi=300)
     plt.show()
