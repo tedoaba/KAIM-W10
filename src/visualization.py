@@ -127,3 +127,49 @@ def plot_with_annotation(merged_data, save_path='../figures/annotations.png'):
 
     # Display the plot
     plt.show()
+
+def plot_residuals(y_pred, residuals):
+    """Plot residuals scatter plot and histogram."""
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_pred, residuals, color='blue', alpha=0.5)
+    plt.axhline(y=0, color='red', linestyle='--', linewidth=2)
+    plt.title('Residuals Plot for XGBoost Model')
+    plt.xlabel('Predicted Values')
+    plt.ylabel('Residuals')
+    plt.grid(True)
+    plt.savefig('../figures/xgb_residual.png', format='png', dpi=300)
+    plt.show()
+
+    plt.figure(figsize=(10, 6))
+    sns.histplot(residuals, bins=30, kde=True, color='purple')
+    plt.title('Distribution of Residuals for XGBoost Model')
+    plt.xlabel('Residuals')
+    plt.ylabel('Frequency')
+    plt.grid(True)
+    plt.savefig('../figures/xgb_residual_dis.png', format='png', dpi=300)
+    plt.show()
+
+def plot_forecast(data, future_dates, future_predictions):
+    """Plot historical and forecasted data."""
+    plt.figure(figsize=(20, 10))
+    plt.plot(data.index, data['Price'], label='Historical Data', color='blue')
+    plt.plot(future_dates, future_predictions, label='Forecasted Data', color='orange', linestyle='--', marker='o')
+    plt.title('(Historical + Future Predictions)')
+    plt.xlabel('Year')
+    plt.ylabel('Value')
+    plt.legend()
+    plt.grid(False)
+    plt.savefig('../figures/xgb_historical_future_prediction.png', format='png', dpi=300)
+    plt.show()
+
+def plot_actual_vs_predicted(y_test, y_pred):
+    """Plot actual vs predicted values scatter plot."""
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_test, y_pred, color='blue', alpha=0.7)
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
+    plt.title('Actual vs Predicted Import Values')
+    plt.xlabel('Actual Values')
+    plt.ylabel('Predicted Values')
+    plt.grid(True)
+    plt.savefig('../figures/xgb_actual_vs_predicted.png', format='png', dpi=300)
+    plt.show()
