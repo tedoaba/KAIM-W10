@@ -234,3 +234,39 @@ def plot_brent_prices_with_events_from_json(df, json_file):
     plt.tight_layout()
     plt.savefig('../figures/brent_prices_with_events.png', format='png', dpi=300)
     plt.show()
+
+# Function to plot residuals
+def plot_residuals_mul(y_test, predictions):
+    for model_name, y_pred in predictions.items():
+        residuals = y_test - y_pred
+        plt.figure(figsize=(10, 6))
+        plt.scatter(y_pred, residuals, color='blue', alpha=0.5)
+        plt.axhline(y=0, color='red', linestyle='--', linewidth=2)
+        plt.title(f'Residuals Plot for {model_name}')
+        plt.xlabel('Predicted Values')
+        plt.ylabel('Residuals')
+        plt.grid(True)
+        plt.savefig(f'../figures/{model_name}_residual.png', format='png', dpi=300)
+        plt.show()
+
+        plt.figure(figsize=(10, 6))
+        sns.histplot(residuals, bins=30, kde=True, color='purple')
+        plt.title(f'Distribution of Residuals for {model_name}')
+        plt.xlabel('Residuals')
+        plt.ylabel('Frequency')
+        plt.grid(True)
+        plt.savefig(f'../figures/{model_name}_residual_dist.png', format='png', dpi=300)
+        plt.show()
+
+# Function to plot Actual vs Predicted
+def plot_actual_vs_predicted_mul(y_test, predictions):
+    for model_name, y_pred in predictions.items():
+        plt.figure(figsize=(10, 6))
+        plt.scatter(y_test, y_pred, alpha=0.5, color='blue')
+        plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)  # Diagonal line
+        plt.title(f'Actual vs Predicted for {model_name}')
+        plt.xlabel('Actual Values (y_test)')
+        plt.ylabel('Predicted Values (y_pred)')
+        plt.grid(True)
+        plt.savefig(f'../figures/{model_name}_actual_vs_predicted.png', format='png', dpi=300)
+        plt.show()
