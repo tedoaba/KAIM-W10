@@ -6,7 +6,7 @@ import pandas as pd
 
 sys.path.append(os.path.abspath('../src'))
 
-from data_loader import load_data
+from src.data_loader import load_data
 
 class TestDataLoader(unittest.TestCase):
 
