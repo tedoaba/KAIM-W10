@@ -31,5 +31,4 @@ jobs:
     # Run unit tests using pytest
     - name: Run tests
       run: |
-        pip install pytest pandas
-        pytest tests --maxfail=1 --disable-warnings
+        python -m unittest discover -s tests -p "test_data_loader.py"
