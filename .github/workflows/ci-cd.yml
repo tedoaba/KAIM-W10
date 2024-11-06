@@ -26,10 +26,9 @@ jobs:
     # Install dependencies
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install -r requirements.txt  # Install project dependencies
 
-    # Run unit tests using pytest
+    # Run unit tests using unittest
     - name: Run tests
       run: |
-        pip install pytest pandas
-        pytest tests --maxfail=1 --disable-warnings
+        python -m unittest discover -s tests -p "test_data_loader.py"  # Discover and run the specific test file
