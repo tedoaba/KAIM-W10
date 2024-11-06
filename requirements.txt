@@ -18,4 +18,3 @@ ruptures
 aesara
 pymc
 arviz
-unittest
