@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load data
-data = pd.read_csv('../data/Brent_Oil_Prices.csv')
+data = pd.read_csv('../data/natural_gas/Brent_Oil_Prices.csv')
 data['Date'] = pd.to_datetime(data['Date'], dayfirst=True, errors='coerce') 
 data.set_index('Date', inplace=True)
 
