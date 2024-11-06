@@ -6,3 +6,10 @@ Flask
 Flask-CORS
 statsmodels
 catboost
+pmdarima
+keras
+tensorflow
+ruptures
+aesara
+pymc
+arviz

@@ -4,6 +4,8 @@ import matplotlib.patches as patches
 import matplotlib.dates as mdates
 import pandas as pd
 import json
+from sklearn.preprocessing import MinMaxScaler
+from data_loader import load_gdp
 
 sns.set(style="whitegrid")
 
@@ -270,3 +272,47 @@ def plot_actual_vs_predicted_mul(y_test, predictions):
         plt.grid(True)
         plt.savefig(f'../figures/{model_name}_actual_vs_predicted.png', format='png', dpi=300)
         plt.show()
+
+
+def plot_relation_with_exchange_rate(df, exchange_rate_fred, exchange_rate_vintage):
+    # Load the datasets
+    df = load_gdp(df)
+    exchange_rate_fred = load_gdp(exchange_rate_fred)
+    exchange_rate_vintage =  load_gdp(exchange_rate_vintage)
+
+    # Merge datasets on 'Date' column using an outer join to keep all dates
+    merged_data = df.merge(exchange_rate_fred, on='Date', how='outer') \
+                    .merge(exchange_rate_vintage, on='Date', how='outer')
+
+    # Sort by 'Date' to ensure data is in chronological order
+    merged_data = merged_data.sort_values(by='Date')
+
+    # Initialize a scaler
+    scaler = MinMaxScaler()
+
+    # Apply Min-Max Scaling to relevant columns, ignoring the 'Date' column
+    columns_to_scale = ['Price', 'DEXUSEU', 'Open', 'High', 'Low', 'Close']
+    merged_data[columns_to_scale] = scaler.fit_transform(merged_data[columns_to_scale])
+
+    print('Plotting exchange rate with price ... ')
+    # Plotting
+    plt.figure(figsize=(18, 8))
+
+    # Plot each normalized column in a single plot with different colors and labels
+    plt.plot(merged_data['Date'], merged_data['Price'], label='Brent Oil Price', color='blue')
+    plt.plot(merged_data['Date'], merged_data['DEXUSEU'], label='USD/EUR Exchange Rate (FRED)', color='purple')
+    plt.plot(merged_data['Date'], merged_data['Open'], label='USD/EUR Open (Alpha Vantage)', color='red')
+    plt.plot(merged_data['Date'], merged_data['High'], label='USD/EUR High (Alpha Vantage)', color='pink')
+    plt.plot(merged_data['Date'], merged_data['Low'], label='USD/EUR Low (Alpha Vantage)', color='brown')
+    plt.plot(merged_data['Date'], merged_data['Close'], label='USD/EUR Close (Alpha Vantage)', color='gray')
+
+    # Labels and title
+    plt.xlabel('Date')
+    plt.ylabel('Scaled Values')
+    plt.title('Brent Oil Prices and USD/EUR Exchange Rates Over Time')
+    plt.legend(loc='upper left')
+    plt.grid(True)
+    plt.savefig('../figures/price_with_exchange_rates.png', format='png', dpi=300)
+
+    plt.show()
+

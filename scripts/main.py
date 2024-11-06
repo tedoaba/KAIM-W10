@@ -23,7 +23,7 @@ from visualization import (
     plot_price_trend, plot_moving_averages, plot_prices, 
     plot_with_annotation, plot_residuals, plot_forecast, 
     plot_actual_vs_predicted, plot_brent_prices_with_events_from_json, 
-    plot_residuals_mul, plot_actual_vs_predicted_mul
+    plot_residuals_mul, plot_actual_vs_predicted_mul, plot_relation_with_exchange_rate
 )
 from feature_engineering import (
     add_time_features, split_data, generate_future_dates, 
@@ -34,10 +34,15 @@ from model_training import (
     display_metrics, get_models, train_and_predict, 
     evaluate_models, forecast_future_mul
 )
+from arima_model import run_arima_model
 
-oil_path = '../data/Brent_Oil_Prices.csv'
-gas_path = '../data/natural_gas_daily.csv'
+oil_path = '../data/natural_gas/Brent_Oil_Prices.csv'
+gas_path = '../data/natural_gas/natural_gas_daily.csv'
 events_path = '../data/events.json'
+df =  '../data/exchange_rate/Brent_Oil_Prices.csv'
+exchange_rate_fred = '../data/exchange_rate/usd_eur_exchange_rate_fred.csv'
+exchange_rate_vintage = '../data/exchange_rate/usd_eur_exchange_rates_alpha_vantage.csv'
+
 
 def utils(oil_path, gas_path, event_path):
     data = load_data(oil_path)
@@ -123,7 +128,8 @@ def main():
     utils(oil_path, gas_path, events_path)
     xgb_model(oil_path)
     multiple_models(oil_path)
-    
+    plot_relation_with_exchange_rate(df, exchange_rate_fred, exchange_rate_vintage)
+    run_arima_model()
 
 if __name__ == "__main__":
     main()
