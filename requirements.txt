@@ -2,8 +2,22 @@ pandas
 numpy
 matplotlib
 seaborn
+<<<<<<< HEAD
 watermark
 plotly
 dash
 xgboost
 scikit-learn
+=======
+Flask
+Flask-CORS
+statsmodels
+catboost
+pmdarima
+keras
+tensorflow
+ruptures
+aesara
+pymc
+arviz
+>>>>>>> main
