@@ -141,17 +141,17 @@ The interactive dashboard provides the following visualization features:
 
 ![Random Fores](figures/RandomForest_forcating_price.png)
 
-![SARIMA](figures/SARIMA_future_forcast.png)
+![SARIMA](figures/SARIMA__future_forcast.png)
 
 - **Residual Distribution**: Interactive elements that allow users to select and highlight residual distribution on the timeline.
 
 ![XGBoost](figures/xgb_residual_dis.png)
 
-![CatBoost](figures/CatBoost_residual_dis.png)
+![CatBoost](figures/CatBoost_residual_dist.png)
 
-![Decision Tree](figures/DecisionTree_residual_dis.png)
+![Decision Tree](figures/DecisionTree_residual_dist.png)
 
-![Random Fores](figures/RandomForest_residual_dis.png)
+![Random Fores](figures/RandomForest_residual_dist.png)
 
 
 - **Forecasting and Predictions**: Displayed through charts (e.g., Recharts, Chart.js) for understanding future price movements based on selected models.
