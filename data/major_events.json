@@ -1,0 +1,60 @@
+{
+    "events": [
+      {
+        "event": "Iran-Iraq War Ends",
+        "date": "1988-08-20",
+        "description": "The end of the Iran-Iraq War increased oil production from both countries, impacting global supply."
+      },
+      {
+        "event": "Gulf War",
+        "date": "1990-08-02",
+        "description": "Iraq's invasion of Kuwait caused a spike in oil prices due to concerns over supply disruptions in the Middle East."
+      },
+      {
+        "event": "Asian Financial Crisis",
+        "date": "1997-07-02",
+        "description": "The financial crisis in Asia led to a drop in demand for oil, causing prices to decline."
+      },
+      {
+        "event": "September 11 Attacks",
+        "date": "2001-09-11",
+        "description": "The terrorist attacks in the U.S. led to market uncertainty and a temporary dip in oil demand."
+      },
+      {
+        "event": "U.S. Invasion of Iraq",
+        "date": "2003-03-20",
+        "description": "The invasion created concerns over supply security in the Middle East, pushing prices higher."
+      },
+      {
+        "event": "Global Financial Crisis",
+        "date": "2008-09-15",
+        "description": "The economic downturn reduced global oil demand, causing a sharp drop in oil prices."
+      },
+      {
+        "event": "Arab Spring",
+        "date": "2011-01-01",
+        "description": "Political instability across the Middle East led to concerns about oil production and supply, causing price fluctuations."
+      },
+      {
+        "event": "OPEC Production Cuts",
+        "date": "2016-01-01",
+        "description": "OPEC decided to cut oil production to stabilize prices after a period of low oil prices due to oversupply."
+      },
+      {
+        "event": "U.S. Sanctions on Iran",
+        "date": "2018-05-08",
+        "description": "The re-imposition of sanctions on Iran reduced its oil exports, impacting global supply and pushing prices up."
+      },
+      {
+        "event": "COVID-19 Pandemic",
+        "date": "2020-03-01",
+        "description": "Global lockdowns and reduced travel caused a significant drop in demand, leading to a major collapse in oil prices."
+      },
+      {
+        "event": "Russia-Ukraine Conflict",
+        "date": "2022-02-24",
+        "description": "The invasion of Ukraine by Russia led to concerns over oil supply, especially in Europe, pushing oil prices higher."
+      }
+    ]
+  }
+  
