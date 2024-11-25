@@ -1,6 +1,6 @@
-# KAIM Weak 10 Challenge
+# Change Point Analysis and Statistical Modelling of Time Series Data - Detecting Changes and Associating causes on Time Series Data
 
-## Brent Oil Price Analysis Project
+## KAIM Weak 10 Challenge
 
 ### Project Overview
 
